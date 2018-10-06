@@ -1,16 +1,16 @@
-package com.java.blog.repository;
+package com.java.blog.service;
 
 import com.java.blog.models.Post;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface PostRepository extends MongoRepository<Post,String> {
+public interface PostService {
     public List<Post> findAll();
     public List<Post> findByTags(String tag);
     public List<Post> findByAuthorId(String id);
     public Post findByTitle(String title);
     public Post findByPostId(String id);
+
+    public void save(Post post);
+    public void delete(String id);
 }

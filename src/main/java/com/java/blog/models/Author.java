@@ -2,14 +2,26 @@ package com.java.blog.models;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="authors")
 public class Author {
     @Id
     private ObjectId authorId;
+
+    @Indexed(unique=true)
     private String name;
     private String photo;
+
+    public Author(){
+
+    }
+
+    public Author(String name, String photo) {
+        this.name = name;
+        this.photo = photo;
+    }
 
     public Author(ObjectId authorId, String name, String photo) {
         this.authorId = authorId;

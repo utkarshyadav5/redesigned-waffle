@@ -7,7 +7,7 @@ import java.util.List;
 public interface PostService {
     public List<Post> findAll();
     public List<Post> findByTags(String tag);
-    public List<Post> findByAuthorId(String id);
+    public List<Post> findByAuthor(String id);
     public Post findByTitle(String title);
     public Post findByPostId(String id);
 

@@ -1,5 +1,8 @@
 package com.java.blog.models;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -14,20 +17,20 @@ public class Author {
     private String name;
     private String photo;
 
-    public Author(){
-
+    public Author() {
     }
 
     public Author(String name, String photo) {
+        this.authorId = new ObjectId();
         this.name = name;
         this.photo = photo;
     }
 
-    public Author(ObjectId authorId, String name, String photo) {
-        this.authorId = authorId;
-        this.name = name;
-        this.photo = photo;
-    }
+//    public Author(ObjectId authorId, String name, String photo) {
+//        this.authorId = authorId;
+//        this.name = name;
+//        this.photo = photo;
+//    }
 
     public String getAuthorId() {
         return authorId.toHexString();

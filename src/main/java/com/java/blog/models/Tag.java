@@ -13,16 +13,16 @@ public class Tag {
     @Indexed(unique=true)
     private String name;
 
-    public Tag(){
+//    public Tag(ObjectId tagId, String name) {
+//        this.tagId = tagId;
+//        this.name = name;
+//    }
 
+    public Tag() {
     }
 
     public Tag(String name) {
-        this.name = name;
-    }
-
-    public Tag(ObjectId tagId, String name) {
-        this.tagId = tagId;
+        this.tagId = new ObjectId();
         this.name = name;
     }
 

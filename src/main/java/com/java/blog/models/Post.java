@@ -1,12 +1,11 @@
 package com.java.blog.models;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 import java.util.List;
@@ -20,20 +19,23 @@ public class Post {
     private String title;
     private String body;
     private Date dateCreated;
+    @DBRef
+    @Field("tags")
     private List<Tag> tags;
-    private Author authorId;
+    @DBRef
+    @Field("authors")
+    private Author author;
 
-    public Post(){
-
+    public Post() {
     }
 
-    public Post(ObjectId postId, String title, String body, Date dateCreated, List<Tag> tags, Author authorId) {
-        this.postId = postId;
+    public Post(String title, String body, Date dateCreated, List<Tag> tags, Author author) {
+        this.postId = new ObjectId();
         this.title = title;
         this.body = body;
         this.dateCreated = dateCreated;
         this.tags = tags;
-        this.authorId = authorId;
+        this.author = author;
     }
 
     public String getPostId() {
@@ -76,26 +78,11 @@ public class Post {
         this.tags = tags;
     }
 
-    public Author getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Author authorId) {
-        this.authorId = authorId;
-    }
-
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-
-        String jsonString = "";
-        try {
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            jsonString = mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        return jsonString;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }
